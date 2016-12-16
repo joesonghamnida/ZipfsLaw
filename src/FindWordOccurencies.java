@@ -12,8 +12,10 @@ public class FindWordOccurencies {
 
         HashMap<String, Integer> wordOccurencies = new HashMap<>();
 
+        //TODO: I know this is incorrect, needs to be fixed to accurately reflect word occurence
         int count = 0;
 
+        //TODO: this is using simple linear search atm, refactor to do binary on the word lists
         for(String word : rawText){
             if(!wordList.contains(word)){
                 wordList.add(word);
@@ -23,7 +25,6 @@ public class FindWordOccurencies {
                 wordOccurencies.put(word, count++);
             }
         }
-
         return wordOccurencies;
     }
 }
