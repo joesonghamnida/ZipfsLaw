@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -25,7 +26,7 @@ public class FindWordOccurrences {
                 wordList.add(word);
                 wordCount.add(++count);
                 //wordOccurrences.put(word,count);
-                
+
             }
             else{
                 //wordOccurrences.put(word, count++);
@@ -36,12 +37,26 @@ public class FindWordOccurrences {
             }
         }
 
-        //print out for testing stuff
-        System.out.println(wordOccurrences.size());
-
-        for(Integer i : wordCount){
-            System.out.println("Count: "+i);
+        for(String word : wordList){
+            wordOccurrences.put(word, wordCount.get(wordList.indexOf(word)));
         }
+
+        //print out for testing stuff
+        System.out.println("Number of words: "+wordOccurrences.size());
+
+        int j = 0;
+        int test = 0;
+        for(String keyStep : wordOccurrences.keySet()){
+            System.out.printf("Word: %s Count: %d\n",keyStep, wordOccurrences.get(keyStep));
+            test = test + wordOccurrences.get(keyStep);
+            j++;
+        }
+        System.out.println(j);
+        System.out.println(test);
+
+        /*for(Integer i : wordCount){
+            System.out.println("Count: "+i);
+        }*/
 
         return wordOccurrences;
     }
