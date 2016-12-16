@@ -15,7 +15,7 @@ public class FindWordOccurrences {
 
         HashMap<String, Integer> wordOccurrences = new HashMap<>();
 
-        //TODO: this is using simple linear search atm, refactor to do binary on the word lists
+        //TODO: this is using simple linear search atm, refactor to do some search on the word lists
         int count = 0;
         for (String word : rawText) {
             count = 0;
@@ -32,7 +32,7 @@ public class FindWordOccurrences {
         for (String word : wordList) {
             wordOccurrences.put(word, wordCount.get(wordList.indexOf(word)));
         }
-        
+
         return wordOccurrences;
     }
 }
