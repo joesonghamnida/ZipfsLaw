@@ -20,7 +20,7 @@ public class RemoveNumbers {
         }
 
         ArrayList<String> holdingCell = new ArrayList<>();
-        
+
         for(int i = 0; i < numbersRemoved.size(); i ++){
             if(!numbersRemoved.get(i).contains("REMOVE-ME")){
                 holdingCell.add(numbersRemoved.get(i));
