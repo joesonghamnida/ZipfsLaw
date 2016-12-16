@@ -12,19 +12,18 @@ public class Main {
         ArrayList<String> punctuationRemoved = RemovePunctuation.removePunctuation(rawText);
         ArrayList<String> numbersRemoved = RemoveNumbers.removeNumbers(punctuationRemoved);
         ArrayList<String> blankStringsRemoved = RemoveBlankStrings.removeBlankStrings(numbersRemoved);
+        ArrayList<String> websitesRemoved = RemoveWebsites.removeWebsites(blankStringsRemoved);
+
 
         System.out.println(punctuationRemoved.size());
         System.out.println(numbersRemoved.size());
         System.out.println(blankStringsRemoved.size());
+        System.out.println(websitesRemoved.size());
 
-        if (!(blankStringsRemoved.size() <= punctuationRemoved.size())) {
+        if (!(websitesRemoved.size() <= punctuationRemoved.size())) {
             System.out.println("Something went wrong");
         } else {
             System.out.println("Okay so far");
-        }
-
-        for(String s : blankStringsRemoved){
-            System.out.println(s);
         }
 
     }
