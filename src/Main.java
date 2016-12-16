@@ -10,11 +10,20 @@ public class Main {
 
         ArrayList<String> rawText = ReadFile.readFile("ArtificialLight.rtf");
         ArrayList<String> punctuationRemoved = RemovePunctuation.removePunctuation(rawText);
+        ArrayList<String> numbersRemoved = RemoveNumbers.removeNumbers(punctuationRemoved);
 
-        for (String s : punctuationRemoved) {
-            System.out.println(s);
+        System.out.println(punctuationRemoved.size());
+        System.out.println(numbersRemoved.size());
+
+        if (!(numbersRemoved.size() <= punctuationRemoved.size())) {
+            System.out.println("Something went wrong");
+        } else {
+            System.out.println("Okay so far");
         }
 
+        for(String s : numbersRemoved){
+            System.out.println(s);
+        }
     }
 }
 
