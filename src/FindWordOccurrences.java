@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class FindWordOccurrences {
 
-    public static HashMap findWordOccurrences(ArrayList<String> rawText){
+    public static HashMap findWordOccurrences(ArrayList<String> rawText) {
 
         ArrayList<String> wordList = new ArrayList<>();
         ArrayList<Integer> wordCount = new ArrayList<>();
@@ -17,33 +17,22 @@ public class FindWordOccurrences {
 
         //TODO: this is using simple linear search atm, refactor to do binary on the word lists
         int count = 0;
-        for(String word : rawText){
+        for (String word : rawText) {
             count = 0;
-            if(!wordList.contains(word)){
+            if (!wordList.contains(word)) {
                 wordList.add(word);
                 wordCount.add(++count);
-            }
-            else{
+            } else {
                 count = wordCount.get(wordList.indexOf(word)) + 1;
                 wordCount.remove(wordList.indexOf(word));
                 wordCount.add(wordList.indexOf(word), count);
             }
         }
 
-        for(String word : wordList){
+        for (String word : wordList) {
             wordOccurrences.put(word, wordCount.get(wordList.indexOf(word)));
         }
-
-        /*int j = 0;
-        int test = 0;
-        for(String keyStep : wordOccurrences.keySet()){
-            test = test + wordOccurrences.get(keyStep);
-            j++;
-        }
-
-        System.out.printf("Unique words: %d\n",j);
-        System.out.printf("Total words: %d\n",test);*/
-
+        
         return wordOccurrences;
     }
 }
