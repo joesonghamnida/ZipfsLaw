@@ -19,11 +19,15 @@ public class RemoveNumbers {
             numbersRemoved.add(string);
         }
 
+        ArrayList<String> holdingCell = new ArrayList<>();
+        
         for(int i = 0; i < numbersRemoved.size(); i ++){
-            if(numbersRemoved.get(i).contains("REMOVE-ME")){
-                numbersRemoved.remove(i);
+            if(!numbersRemoved.get(i).contains("REMOVE-ME")){
+                holdingCell.add(numbersRemoved.get(i));
             }
         }
+
+        numbersRemoved = holdingCell;
 
         return numbersRemoved;
     }
