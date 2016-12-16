@@ -1,3 +1,8 @@
+import cleaners.RemoveBlankStrings;
+import cleaners.RemoveNumbers;
+import cleaners.RemovePunctuation;
+import cleaners.RemoveWebsites;
+
 import java.util.ArrayList;
 
 /**
