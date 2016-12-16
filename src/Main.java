@@ -11,19 +11,22 @@ public class Main {
         ArrayList<String> rawText = ReadFile.readFile("ArtificialLight.rtf");
         ArrayList<String> punctuationRemoved = RemovePunctuation.removePunctuation(rawText);
         ArrayList<String> numbersRemoved = RemoveNumbers.removeNumbers(punctuationRemoved);
+        ArrayList<String> blankStringsRemoved = RemoveBlankStrings.removeBlankStrings(numbersRemoved);
 
         System.out.println(punctuationRemoved.size());
         System.out.println(numbersRemoved.size());
+        System.out.println(blankStringsRemoved.size());
 
-        if (!(numbersRemoved.size() <= punctuationRemoved.size())) {
+        if (!(blankStringsRemoved.size() <= punctuationRemoved.size())) {
             System.out.println("Something went wrong");
         } else {
             System.out.println("Okay so far");
         }
 
-        for(String s : numbersRemoved){
+        for(String s : blankStringsRemoved){
             System.out.println(s);
         }
+
     }
 }
 
