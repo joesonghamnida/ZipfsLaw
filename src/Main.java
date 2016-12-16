@@ -10,7 +10,7 @@ public class Main {
 
         ArrayList<String> rawText = ReadFile.readFile("ArtificialLight.rtf");
         ArrayList<String> cleanedText = CleanFile.cleanFile(rawText);
-        FindWordOccurencies.findWordOccurencies(cleanedText);
+        FindWordOccurrences.findWordOccurrences(cleanedText);
 
 
     }
