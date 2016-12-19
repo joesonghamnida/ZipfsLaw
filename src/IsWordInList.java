@@ -14,6 +14,14 @@ public class IsWordInList {
         for(int i = 0; i < wordList.size();i ++){
 
             /***
+             *
+             * possible algorithms:
+             * Rabin - Karp
+             * Knuth - Morris - Pratt
+             *
+             */
+
+            /***
              * notes: char is two bytes
              * need to look at other algorithms to see if something takes less work / is more efficient
              * convert target word to byte something
@@ -21,6 +29,7 @@ public class IsWordInList {
              *
              * determine largest string using length then use to establish byte array size
              * string to char array
+             * ..or just string to bytes or bits, and convert from that?
              * char to bytes
              * bytes to number
              * number to array
@@ -31,7 +40,6 @@ public class IsWordInList {
              * should probably only run word -> number once, store in array
              * binary can be ran multiple times
              */
-
 
             holdingArray[i] = wordList.get(i);
         }
