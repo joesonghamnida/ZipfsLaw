@@ -10,7 +10,7 @@ public class SortByFrequency {
     //TODO:
 
     /***
-     * refactor to improve readability
+     * refactor to improve readability, cut out deadwood
      * do something about returning the sorted words and associated counts
      * maybe object or hashmap again?
      * clustering? would have to control for all the single-occurrence words
@@ -24,14 +24,14 @@ public class SortByFrequency {
         ArrayList<Integer> originalCountOrder = new ArrayList<>();
         ArrayList<String> originalWordOrder = new ArrayList<>();
 
-        for (String key : wordOccurrences.keySet()){
+        for (String key : wordOccurrences.keySet()) {
             originalCountOrder.add(wordOccurrences.get(key));
             originalWordOrder.add(key);
         }
 
-        int[]sortedCountOrder = new int[wordOccurrences.size()];
+        int[] sortedCountOrder = new int[wordOccurrences.size()];
 
-        for (int j = 0; j < wordOccurrences.size();j++){
+        for (int j = 0; j < wordOccurrences.size(); j++) {
             sortedCountOrder[j] = originalCountOrder.get(j);
         }
 
@@ -40,9 +40,9 @@ public class SortByFrequency {
         ArrayList<String> usedWords = new ArrayList<>();
         ArrayList<Integer> usedIndices = new ArrayList<>();
 
-        for(int i = 0;i<originalCountOrder.size();i++){
+        for (int i = 0; i < originalCountOrder.size(); i++) {
             int positionalIndex = originalCountOrder.indexOf(sortedCountOrder[i]);
-            if(usedIndices.contains(positionalIndex)){
+            if (usedIndices.contains(positionalIndex)) {
                 positionalIndex = i;
             }
             usedIndices.add(positionalIndex);
@@ -50,7 +50,7 @@ public class SortByFrequency {
             int adjustedPositionalIndex = positionalIndex;
 
             String word = originalWordOrder.get(positionalIndex);
-            if (usedWords.contains(word)){
+            if (usedWords.contains(word)) {
                 word = originalWordOrder.get(adjustedPositionalIndex);
             }
 
