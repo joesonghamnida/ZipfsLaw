@@ -11,6 +11,7 @@ public class SortByFrequency {
 
     /***
      * refactor to improve readability, cut out deadwood
+     * CURRENT RESULTS NOT ACCURATE
      * do something about returning the sorted words and associated counts
      * maybe object or hashmap again?
      * clustering? would have to control for all the single-occurrence words
@@ -40,10 +41,12 @@ public class SortByFrequency {
         ArrayList<String> usedWords = new ArrayList<>();
         ArrayList<Integer> usedIndices = new ArrayList<>();
 
-        for (int i = 0; i < originalCountOrder.size(); i++) {
+        HashMap<String, Integer> sortedHashMap = new HashMap<>();
+
+        for (int i = 0; i < originalCountOrder.size(); ++i) {
             int positionalIndex = originalCountOrder.indexOf(sortedCountOrder[i]);
             if (usedIndices.contains(positionalIndex)) {
-                positionalIndex = i;
+                positionalIndex = i++;
             }
             usedIndices.add(positionalIndex);
 
@@ -55,8 +58,28 @@ public class SortByFrequency {
             }
 
             usedWords.add(word);
+
+            int count = sortedCountOrder[i];
+
+            sortedHashMap.put(word,count);
+
             System.out.printf("Word: %s Count: %d Position: %d\n", originalWordOrder.get(adjustedPositionalIndex), sortedCountOrder[i], positionalIndex);
+            if(sortedCountOrder[i] == wordOccurrences.get(word)){
+                System.out.println("okay");
+            }
+            else{
+                System.out.println("Error");
+            }
         }
+
+        /*for(String key : originalWordOrder){
+            if(wordOccurrences.get(key).equals(sortedHashMap.get(key))){
+                System.out.println("");
+            }
+            else{
+                System.out.printf("Error - Word: %s     Orig: %d    Adj: %d\n",key, wordOccurrences.get(key),sortedHashMap.get(key));
+            }
+        }*/
 
         //return sortedPairs;
     }
