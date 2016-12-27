@@ -15,24 +15,38 @@ import java.util.HashMap;
 public class DatabaseTests {
 
     //helper method
-    public Connection startConnection()throws SQLException {
+    public Connection startConnection() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:mem:test");
         SQLQueries.createDatabase(conn);
         return conn;
     }
 
     @Test
-    public void loadDataIntoDatabase()throws SQLException{
+    public void loadDataIntoDatabase() throws SQLException {
         Connection connection = startConnection();
         HashMap<String, Integer> testData = new HashMap<>();
         testData.put("alice", 1);
-        testData.put("bob",2);
-        testData.put("charlie",3);
+        testData.put("bob", 2);
+        testData.put("charlie", 3);
 
         SQLQueries.loadWordsIntoDB(connection, testData);
         HashMap<String, Integer> results = SQLQueries.selectAllWords(connection);
         Assert.assertEquals(results.size(), 3);
         connection.close();
     }
-    
+
+    @Test
+    public void selectACertainNumberOfWords()throws SQLException{
+        Connection connection = startConnection();
+        HashMap<String, Integer> testData = new HashMap<>();
+        testData.put("alice", 1);
+        testData.put("bob", 2);
+        testData.put("charlie", 3);
+
+        SQLQueries.loadWordsIntoDB(connection, testData);
+        HashMap<String, Integer> results = SQLQueries.selectCertainNumberOfWords(connection, 2);
+        Assert.assertEquals(results.size(), 2);
+        connection.close();
+    }
+
 }
