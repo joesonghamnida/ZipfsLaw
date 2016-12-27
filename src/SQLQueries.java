@@ -48,9 +48,18 @@ public class SQLQueries{
         return selectedWords;
     }
 
-    public static HashMap<String, Integer> selectCertainNumberOfWords(Connection conn, int number, String direction)throws SQLException{
-        Statement statement = conn.createStatement();
+    public static HashMap<String, Integer> selectCertainNumberOfWords(Connection conn, int number)throws SQLException{
         HashMap<String, Integer> selectedWords = new HashMap<>();
+
+        PreparedStatement statement = conn.prepareStatement("SELECT * FROM words WHERE ROWNUM <= ?");
+        statement.setInt(1, number);
+        ResultSet results = statement.executeQuery();
+
+        while(results.next()){
+            String word = results.getString("word");
+            int count = results.getInt("frequency");
+            selectedWords.put(word,count);
+        }
 
         return selectedWords;
     }
