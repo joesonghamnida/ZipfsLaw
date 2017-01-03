@@ -1,4 +1,5 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -33,6 +34,18 @@ public class DatabaseTests {
         HashMap<String, Integer> results = SQLQueries.selectAllWords(connection);
         Assert.assertEquals(results.size(), 3);
         connection.close();
+    }
+
+    @Test
+    public void checkWordCount()throws SQLException{
+        Connection connection = startConnection();
+        HashMap<String, Integer> testData = new HashMap<>();
+        testData.put("alice", 1);
+        testData.put("bob", 2);
+        testData.put("charlie", 3);
+
+        SQLQueries.loadWordsIntoDB(connection, testData);
+        Assert.assertTrue(SQLQueries.checkWordCount(connection) == 3);
     }
 
     @Test
