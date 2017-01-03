@@ -27,10 +27,23 @@ public class SQLQueries{
         }
     }
 
+    public static Integer checkWordCount(Connection conn)throws SQLException{
+        PreparedStatement statement = conn.prepareStatement("SELECT COUNT (word) FROM words");
+        ResultSet result = statement.executeQuery();
+        System.out.println(result);
+        int count = 0;
+        while (result.next()){
+            count = result.getInt(1);
+        }
+        return count;
+    }
+
     public static void sortWordsByFrequency(Connection conn)throws SQLException{
         Statement statement = conn.createStatement();
 
     }
+
+
 
     public static HashMap<String, Integer> selectAllWords(Connection conn)throws SQLException{
 
