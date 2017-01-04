@@ -62,4 +62,24 @@ public class DatabaseTests {
         connection.close();
     }
 
+    @Test
+    public void sortWordsByFrequency()throws SQLException{
+        Connection connection = startConnection();
+        HashMap<String, Integer> testData = new HashMap<>();
+        testData.put("aa", 3);
+        testData.put("bbbbb", 2);
+        testData.put("c", 1);
+
+        SQLQueries.loadWordsIntoDB(connection, testData);
+
+        HashMap<String, Integer> results = SQLQueries.sortWordsByFrequency(connection);
+        int i = 3;
+        System.out.println("test");
+
+        for (String key : results.keySet()){
+            Assert.assertTrue(results.get(key).equals(i));
+            i--;
+        }
+    }
+
 }
