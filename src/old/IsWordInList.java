@@ -1,4 +1,4 @@
-
+package old;
 //this is just an implementation of a searching algorithm in order to make searching for a word in an
 //array list faster
 
@@ -8,6 +8,7 @@
  * Rabin - Karp
  * Knuth - Morris - Pratt
  * https://www.topcoder.com/community/data-science/data-science-tutorials/introduction-to-string-searching-algorithms/
+ * https://www.javacodegeeks.com/2010/09/string-performance-exact-string.html
  *
  * Progress: 12/18/16
  * -implemented hashing functions and binary search
@@ -44,8 +45,9 @@ import java.util.Arrays;
 import java.util.Arrays.*;
 
 
-
 public class IsWordInList {
+
+
     //hashing, too slow
     public static int createTargetHash(String word) {
         int targetHash = word.hashCode();

@@ -9,7 +9,7 @@ public class RemovePunctuation {
 
     public static ArrayList<String> removePunctuation(ArrayList<String> rawText) {
         ArrayList<String> cleanedText = new ArrayList<>();
-        String[] punctuationMarks = {".", ",", ":", ";", "?","<", ">", "\\", "'","{", "}", "*","-","_","(",")","[","]","|", "/", "@", "#", "$", "%", "^", "&", "\"", "+", "~", "`", "="};
+        String[] punctuationMarks = {".", ",", ":", ";", "?","<", ">", "\\", "'","{", "}", "*","-","_","(",")","[","]","|", "!", "/", "@", "#", "$", "%", "^", "&", "\"", "+", "~", "`", "="};
 
         for (String word : rawText) {
 

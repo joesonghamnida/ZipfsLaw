@@ -1,3 +1,5 @@
+package old;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,7 +19,7 @@ public class SortByFrequency {
      * clustering? would have to control for all the single-occurrence words
      */
 
-
+/***
     public static void sortByFrequency(HashMap<String, Integer> wordOccurrences) {
 
         //do something with clustering? If words occur the same # of times, maybe related
@@ -83,7 +85,8 @@ public class SortByFrequency {
 
         //return sortedPairs;
     }
-}
+
+
 
 
 

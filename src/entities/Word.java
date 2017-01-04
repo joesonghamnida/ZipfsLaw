@@ -1,3 +1,5 @@
+package entities;
+
 /**
  * Created by joe on 1/3/17.
  */
