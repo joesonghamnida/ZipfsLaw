@@ -4,74 +4,84 @@ import java.util.HashMap;
 /**
  * Created by joe on 12/23/16.
  */
-public class SQLQueries{
+public class SQLQueries {
 
-    public static Connection connection()throws SQLException {
+    public static Connection connection() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
         return conn;
     }
 
-    public static void createDatabase(Connection conn)throws SQLException{
+    public static void createDatabase(Connection conn) throws SQLException {
         Statement statement = conn.createStatement();
         statement.execute("CREATE TABLE IF NOT EXISTS words(id IDENTITY , word VARCHAR, frequency INTEGER)");
     }
 
-    public static void loadWordsIntoDB(Connection conn, HashMap<String, Integer> wordOccurrences)throws SQLException{
+    public static void loadWordsIntoDB(Connection conn, HashMap<String, Integer> wordOccurrences) throws SQLException {
 
-        for(String word : wordOccurrences.keySet()){
+        for (String word : wordOccurrences.keySet()) {
             int frequency = wordOccurrences.get(word);
-           PreparedStatement statement = conn.prepareStatement("INSERT INTO words VALUES(NULL, ?, ?)");
-            statement.setString(1,word);
-            statement.setInt(2,frequency);
+            PreparedStatement statement = conn.prepareStatement("INSERT INTO words VALUES(NULL, ?, ?)");
+            statement.setString(1, word);
+            statement.setInt(2, frequency);
             statement.execute();
         }
     }
 
-    public static Integer checkWordCount(Connection conn)throws SQLException{
+    public static Integer checkWordCount(Connection conn) throws SQLException {
         PreparedStatement statement = conn.prepareStatement("SELECT COUNT (word) FROM words");
         ResultSet result = statement.executeQuery();
         System.out.println(result);
         int count = 0;
-        while (result.next()){
+        while (result.next()) {
             count = result.getInt(1);
         }
         return count;
     }
 
-    public static void sortWordsByFrequency(Connection conn)throws SQLException{
-        Statement statement = conn.createStatement();
+    //TODO: Look into ordered maps, etc. Possible bug with how HashMap is storing the values
+    public static HashMap<String, Integer> sortWordsByFrequency(Connection conn) throws SQLException {
 
+        HashMap<String, Integer> selectedWords = new HashMap<>();
+
+        PreparedStatement statement = conn.prepareStatement("SELECT word, frequency FROM words ORDER BY frequency DESC ");
+
+        ResultSet results = statement.executeQuery();
+        while (results.next()) {
+            String word = results.getString("word");
+            int count = results.getInt("frequency");
+            selectedWords.put(word, count);
+        }
+
+        return selectedWords;
     }
 
-
-
-    public static HashMap<String, Integer> selectAllWords(Connection conn)throws SQLException{
+    public static HashMap<String, Integer> selectAllWords(Connection conn) throws SQLException {
 
         HashMap<String, Integer> selectedWords = new HashMap<>();
 
         PreparedStatement statement = conn.prepareStatement("SELECT * FROM words ORDER BY frequency DESC");
 
         ResultSet results = statement.executeQuery();
-        while(results.next()){
+        while (results.next()) {
             String word = results.getString("word");
             int count = results.getInt("frequency");
-            selectedWords.put(word,count);
+            selectedWords.put(word, count);
         }
 
         return selectedWords;
     }
 
-    public static HashMap<String, Integer> selectCertainNumberOfWords(Connection conn, int number)throws SQLException{
+    public static HashMap<String, Integer> selectCertainNumberOfWords(Connection conn, int number) throws SQLException {
         HashMap<String, Integer> selectedWords = new HashMap<>();
 
         PreparedStatement statement = conn.prepareStatement("SELECT * FROM words WHERE ROWNUM <= ?");
         statement.setInt(1, number);
         ResultSet results = statement.executeQuery();
 
-        while(results.next()){
+        while (results.next()) {
             String word = results.getString("word");
             int count = results.getInt("frequency");
-            selectedWords.put(word,count);
+            selectedWords.put(word, count);
         }
 
         return selectedWords;
