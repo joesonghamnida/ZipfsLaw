@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static java.lang.System.exit;
+
 /**
  * Created by joe on 12/15/16.
  */
@@ -35,14 +37,15 @@ public class Main {
         int i = 0;
         while( i < 10) {
             for (Word word : sortedWords) {
-                System.out.printf("Word: %s Occurrences: %d\n", word.getWord(), word.getFrequency());
+                double average = word.getFrequency()/wordOccurrences.size();
+                System.out.printf("Word: %s Occurrences: %d Frequency: %s\n", word.getWord(), word.getFrequency(),String.valueOf(average));
                 i++;
                 if(i == 10){
                     break;
                 }
             }
         }
-
+        exit(0);
     }
 }
 
