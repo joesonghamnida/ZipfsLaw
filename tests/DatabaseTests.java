@@ -1,3 +1,4 @@
+import entities.Word;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -6,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -62,6 +64,7 @@ public class DatabaseTests {
         connection.close();
     }
 
+
     @Test
     public void sortWordsByFrequency()throws SQLException{
         Connection connection = startConnection();
@@ -72,12 +75,12 @@ public class DatabaseTests {
 
         SQLQueries.loadWordsIntoDB(connection, testData);
 
-        HashMap<String, Integer> results = SQLQueries.sortWordsByFrequency(connection);
+        ArrayList<Word> results = SQLQueries.sortWordsByFrequency(connection);
         int i = 3;
         System.out.println("test");
 
-        for (String key : results.keySet()){
-            Assert.assertTrue(results.get(key).equals(i));
+        for (Word word : results){
+            Assert.assertTrue(word.getFrequency() == (i));
             i--;
         }
     }
