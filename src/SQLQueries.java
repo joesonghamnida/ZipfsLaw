@@ -1,5 +1,9 @@
+import entities.Word;
+
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by joe on 12/23/16.
@@ -38,10 +42,10 @@ public class SQLQueries {
         return count;
     }
 
-    //TODO: Look into ordered maps, etc. Possible bug with how HashMap is storing the values
-    public static HashMap<String, Integer> sortWordsByFrequency(Connection conn) throws SQLException {
+    public static ArrayList<Word> sortWordsByFrequency(Connection conn) throws SQLException {
 
-        HashMap<String, Integer> selectedWords = new HashMap<>();
+        //HashMap<String, Integer> selectedWords = new HashMap<>();
+        ArrayList<Word> selectedWords = new ArrayList<>();
 
         PreparedStatement statement = conn.prepareStatement("SELECT word, frequency FROM words ORDER BY frequency DESC ");
 
@@ -49,7 +53,8 @@ public class SQLQueries {
         while (results.next()) {
             String word = results.getString("word");
             int count = results.getInt("frequency");
-            selectedWords.put(word, count);
+            Word w = new Word(word,count);
+            selectedWords.add(w);
         }
 
         return selectedWords;

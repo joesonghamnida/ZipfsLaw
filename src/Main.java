@@ -1,3 +1,4 @@
+import entities.Word;
 import org.h2.tools.Server;
 
 import java.io.FileNotFoundException;
@@ -29,12 +30,12 @@ public class Main {
 
         SQLQueries.loadWordsIntoDB(conn, wordOccurrences);
 
-        HashMap<String, Integer> sortedWords = SQLQueries.sortWordsByFrequency(conn);
+        ArrayList<Word> sortedWords = SQLQueries.sortWordsByFrequency(conn);
 
         int i = 0;
         while( i < 10) {
-            for (String key : sortedWords.keySet()) {
-                System.out.printf("Word: %s Frequency: %d\n", key, sortedWords.get(key));
+            for (Word word : sortedWords) {
+                System.out.printf("Word: %s Occurrences: %d\n", word.getWord(), word.getFrequency());
                 i++;
                 if(i == 10){
                     break;
