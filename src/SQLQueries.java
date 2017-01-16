@@ -15,6 +15,11 @@ public class SQLQueries {
         return conn;
     }
 
+    public static void dropDatabase(Connection conn)throws SQLException{
+        Statement statement = conn.createStatement();
+        statement.execute("DROP TABLE IF EXISTS words");
+    }
+
     public static void createDatabase(Connection conn) throws SQLException {
         Statement statement = conn.createStatement();
         statement.execute("CREATE TABLE IF NOT EXISTS words(id IDENTITY , word VARCHAR, frequency INTEGER)");
