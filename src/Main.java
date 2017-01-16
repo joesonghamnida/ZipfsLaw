@@ -36,12 +36,12 @@ public class Main {
         ArrayList<Word> sortedWords = SQLQueries.sortWordsByFrequency(conn);
 
         int i = 0;
-        while( i < 10) {
+        while( i < 20) {
             for (Word word : sortedWords) {
-                double average = word.getFrequency()/wordOccurrences.size();
+                double average = (double) word.getFrequency()/ (double) cleanedText.size();
                 System.out.printf("Word: %s Occurrences: %d Frequency: %s\n", word.getWord(), word.getFrequency(),String.valueOf(average));
                 i++;
-                if(i == 10){
+                if(i == 20){
                     break;
                 }
             }
