@@ -21,6 +21,7 @@ public class Main {
         //deals with h2 db server
         Server.createWebServer().start();
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
+        SQLQueries.dropDatabase(conn);
         SQLQueries.createDatabase(conn);
 
         System.out.println("----- Program -----");
