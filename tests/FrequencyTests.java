@@ -31,7 +31,7 @@ public class FrequencyTests {
             System.out.println(d);
         }
 
-        Assert.assertTrue(results.get(0) == 4.0);
+        Assert.assertTrue(results.get(0) == .5);
 
     }
 
