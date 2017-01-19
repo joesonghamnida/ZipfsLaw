@@ -1,26 +1,36 @@
+import entities.Word;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
 public class Frequencies {
 
-    public static ArrayList<Double> projectedWordFrequency(ArrayList<String> cleanedText){
-        ArrayList<Double> projectedFrequency = new ArrayList<>();
+    public static ArrayList<Double> projectedWordFrequency(ArrayList<String> cleanedText) {
+        ArrayList<Double> projectedFrequencies = new ArrayList<>();
 
         double documentSize = cleanedText.size();
 
-        for(int denominator = 2; denominator < 10; denominator++){
+        for (int denominator = 2; denominator < 10; denominator++) {
             double result = documentSize / denominator;
             result = result / documentSize;
-            projectedFrequency.add(result);
+            projectedFrequencies.add(result);
         }
 
-        return projectedFrequency;
+        return projectedFrequencies;
     }
 
-    public static double actualWordFrequency(String cleanedText){
+    public static ArrayList<Double> actualWordFrequency(ArrayList<Word> sortedWords, ArrayList<String> cleanedText) {
+        ArrayList<Double> actualFrequencies = new ArrayList<>();
 
-        double actualFrequency = 0.0;
+        for (Word word : sortedWords) {
+            double average = (double) word.getFrequency() / (double) cleanedText.size();
+            actualFrequencies.add(average);
+        }
 
-        return actualFrequency;
+        return actualFrequencies;
+    }
+
+    public static void compareFrequencies(ArrayList<Double> actualFrequencies, ArrayList<Double> projectedFrequencies){
+
     }
 }
