@@ -1,14 +1,22 @@
+import javax.swing.*;
+import java.util.ArrayList;
 
 public class Frequencies {
 
-    public static double projectedWordFrequency(){
+    public static ArrayList<Double> projectedWordFrequency(ArrayList<String> cleanedText){
+        ArrayList<Double> projectedFrequency = new ArrayList<>();
 
-        double projectedFrequency = 0.0;
+        double documentSize = cleanedText.size();
+
+        for(int denominator = 2; denominator < 10; denominator++){
+            double result = documentSize / denominator;
+            projectedFrequency.add(result);
+        }
 
         return projectedFrequency;
     }
 
-    public static double actualWordFrequency(){
+    public static double actualWordFrequency(String cleanedText){
 
         double actualFrequency = 0.0;
 
