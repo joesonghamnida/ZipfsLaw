@@ -10,6 +10,7 @@ public class Frequencies {
 
         for(int denominator = 2; denominator < 10; denominator++){
             double result = documentSize / denominator;
+            result = result / documentSize;
             projectedFrequency.add(result);
         }
 
