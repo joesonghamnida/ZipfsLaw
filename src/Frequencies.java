@@ -2,6 +2,7 @@ import entities.Word;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.System.exit;
 
@@ -16,7 +17,8 @@ public class Frequencies {
         double documentSize = cleanedText.size();
 
         for (int denominator = 2; denominator < documentSize; denominator++) {
-            double result = documentSize / denominator;
+            //TODO: figure out how to make this flexbile
+            double result = documentSize / (denominator * 10);
             result = result / documentSize;
             projectedFrequencies.add(result);
         }
@@ -35,18 +37,14 @@ public class Frequencies {
         return actualFrequencies;
     }
 
+    //TODO: unsigned numbers and two's complement - issue with actual - projected
     public static ArrayList<Double> compareFrequencies(ArrayList<Double> actualFrequencies, ArrayList<Double> projectedFrequencies){
 
         ArrayList<Double> frequencyDifferences = new ArrayList<>();
 
-        //TODO: try / catch
-        if(actualFrequencies.size() != projectedFrequencies.size()){
-            System.out.println("Actual and projected frequency lists differ in size");
-            exit(0);
-        }
-
         for(int i = 0; i < actualFrequencies.size(); i++){
             double difference = actualFrequencies.get(i) - projectedFrequencies.get(i);
+            frequencyDifferences.add(difference);
         }
 
         return frequencyDifferences;
