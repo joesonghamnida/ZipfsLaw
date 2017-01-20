@@ -35,16 +35,23 @@ public class Main {
 
         ArrayList<Word> sortedWords = SQLQueries.sortWordsByFrequency(conn);
 
-        int i = 0;
+        /*int i = 0;
         while( i < 20) {
             for (Word word : sortedWords) {
-                double average = (double) word.getFrequency()/ (double) cleanedText.size();
+                double average = (double) word.getFrequency() / (double) cleanedText.size();
                 System.out.printf("Word: %s Occurrences: %d Frequency: %s\n", word.getWord(), word.getFrequency(),String.valueOf(average));
                 i++;
                 if(i == 20){
                     break;
                 }
             }
+        }*/
+
+        ArrayList<Double> projectedFrequencies = Frequencies.projectedWordFrequency(cleanedText);
+        ArrayList<Double> actualFrequencies = Frequencies.actualWordFrequency(sortedWords, cleanedText);
+        ArrayList<Double> differences = Frequencies.compareFrequencies(actualFrequencies, projectedFrequencies);
+        for(Double d : differences){
+            System.out.println(d);
         }
         exit(0);
     }
