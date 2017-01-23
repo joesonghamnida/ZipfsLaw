@@ -16,9 +16,9 @@ public class Frequencies {
 
         double documentSize = cleanedText.size();
 
-        for (int denominator = 2; denominator < documentSize; denominator++) {
-            //TODO: figure out how to make this flexbile
-            double result = documentSize / (denominator * 10);
+        for (int denominator = 1; denominator < documentSize; denominator++) {
+            //TODO: figure out how to make this flexible
+            double result = documentSize / (denominator);
             result = result / documentSize;
             projectedFrequencies.add(result);
         }
@@ -43,7 +43,7 @@ public class Frequencies {
         ArrayList<Double> frequencyDifferences = new ArrayList<>();
 
         for(int i = 0; i < actualFrequencies.size(); i++){
-            double difference = actualFrequencies.get(i) - projectedFrequencies.get(i);
+            double difference = projectedFrequencies.get(i) - actualFrequencies.get(i);
             frequencyDifferences.add(difference);
         }
 
