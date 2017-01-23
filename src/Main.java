@@ -21,12 +21,21 @@ public class Main {
         //deals with h2 db server
         Server.createWebServer().start();
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
+
+        program(conn, "ArtificialLight.rtf");
+        program(conn, "IBM.rtf");
+        program(conn, "NitroExplosives.rtf");
+        program(conn, "AtlanticTelegraph.rtf");
+        exit(0);
+    }
+
+    public static void program(Connection conn, String document)throws SQLException, FileNotFoundException{
         SQLQueries.dropDatabase(conn);
         SQLQueries.createDatabase(conn);
 
-        System.out.println("----- Program -----");
+        System.out.println("File: "+document);
 
-        ArrayList<String> rawText = ReadFile.readFile("ArtificialLight.rtf");
+        ArrayList<String> rawText = ReadFile.readFile(document);
         ArrayList<String> cleanedText = CleanFile.cleanFile(rawText);
         HashMap<String, Integer> wordOccurrences = FindWordOccurrences.findWordOccurrences(cleanedText);
         System.out.println(CheckWordCount.checkWordCount(wordOccurrences, cleanedText));
@@ -35,25 +44,17 @@ public class Main {
 
         ArrayList<Word> sortedWords = SQLQueries.sortWordsByFrequency(conn);
 
-        /*int i = 0;
-        while( i < 20) {
-            for (Word word : sortedWords) {
-                double average = (double) word.getFrequency() / (double) cleanedText.size();
-                System.out.printf("Word: %s Occurrences: %d Frequency: %s\n", word.getWord(), word.getFrequency(),String.valueOf(average));
-                i++;
-                if(i == 20){
-                    break;
-                }
-            }
-        }*/
-
         ArrayList<Double> projectedFrequencies = Frequencies.projectedWordFrequency(cleanedText);
         ArrayList<Double> actualFrequencies = Frequencies.actualWordFrequency(sortedWords, cleanedText);
         ArrayList<Double> differences = Frequencies.compareFrequencies(actualFrequencies, projectedFrequencies);
+
+        double average = 0.0;
+
         for(Double d : differences){
-            System.out.println(d);
+            average += d;
         }
-        exit(0);
+
+        System.out.println("The average difference between the projected word frequency and the actual frequency is "+average/wordOccurrences.size()+"\n");
     }
 }
 
