@@ -1,7 +1,5 @@
 import org.junit.Assert;
 import org.junit.Test;
-import cleaners.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +29,7 @@ public class CleanerTests {
 
         Assert.assertEquals(14, testData.size());
         ArrayList<String> holdingCell = new ArrayList<>();
-        holdingCell = RemovePunctuation.removePunctuation(testData);
+        holdingCell = CleanFile.removePunctuation(testData);
         List<String> expectedResults = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n");
         Assert.assertEquals(holdingCell, expectedResults);
     }
@@ -49,8 +47,9 @@ public class CleanerTests {
         testData.add("8h9h0");
 
         ArrayList<String> holdingCell = new ArrayList<>();
-        holdingCell = RemoveNumbers.removeNumbers(testData);
-        List<String> expectedResults = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
+        holdingCell = CleanFile.removeNumbers(testData);
+        List<String> expectedResults = Arrays.asList("a", "b", "c", "d", "e", "ff", "gg", "hh");
+        Assert.assertEquals(8, expectedResults.size());
         Assert.assertEquals(holdingCell, expectedResults);
     }
 
@@ -67,9 +66,9 @@ public class CleanerTests {
         testData.add(" h   h  ");
 
         ArrayList<String> holdingCell = new ArrayList<>();
-        holdingCell = RemoveBlankStrings.removeBlankStrings(testData);
-        List<String> expectedResults = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
-        Assert.assertEquals(holdingCell, expectedResults);
+        holdingCell = CleanFile.removeBlankStrings(testData);
+        List<String> expectedResults = Arrays.asList("a", "b", "c", "d", "ee", "ff", "gg", "hh");
+        Assert.assertEquals(expectedResults, holdingCell);
     }
 
     @Test
@@ -81,7 +80,7 @@ public class CleanerTests {
         testData.add("httpsd");
 
         ArrayList<String> holdingCell = new ArrayList<>();
-        holdingCell = RemoveWebsites.removeWebsites(testData);
+        holdingCell = CleanFile.removeWebsites(testData);
         List<String> expectedResults = Arrays.asList("a");
         Assert.assertEquals(holdingCell, expectedResults);
     }
