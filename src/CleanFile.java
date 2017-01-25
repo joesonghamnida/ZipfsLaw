@@ -38,15 +38,16 @@ public class CleanFile {
     public static ArrayList<String> removeBlankStrings(ArrayList<String> rawText) {
         ArrayList<String> blanksRemoved = new ArrayList<>();
 
-        ArrayList<String> holdingCell = new ArrayList<>();
-
         for (String string : rawText) {
-            if (!(string.equals(""))) {
-                holdingCell.add(string);
+            char[] chars = string.toCharArray();
+            string = "";
+            for(char c : chars){
+                if(c != ' '){
+                    string += c;
+                }
             }
+            blanksRemoved.add(string);
         }
-
-        blanksRemoved = holdingCell;
 
         return blanksRemoved;
     }
@@ -54,17 +55,20 @@ public class CleanFile {
     public static ArrayList<String> removeNumbers(ArrayList<String> rawText){
         ArrayList<String> numbersRemoved = new ArrayList<>();
 
-        String[] numbers = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+        char[] numbers = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
 
         for(String string : rawText){
-            for(String number : numbers){
-                if(string.contains(number)){
-                    string = string + "REMOVE-ME";
+                char[] letters = string.toCharArray();
+                string = "";
+                for(char letter : letters){
+                    for(char c : numbers){
+                        if(c != letter){
+                            string += letter;
+                        }
+                    }
                 }
-            }
             numbersRemoved.add(string);
-        }
-        numbersRemoved = removeMarker(numbersRemoved);
+            }
         return numbersRemoved;
     }
 
