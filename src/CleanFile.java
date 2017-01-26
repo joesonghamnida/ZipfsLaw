@@ -20,29 +20,15 @@ public class CleanFile {
         cleanedText = websitesRemoved;
         return cleanedText;
     }
-
-    public static ArrayList<String> removeMarker(ArrayList<String> markedText){
-        ArrayList<String> holdingCell = new ArrayList<>();
-
-        for(int i = 0; i < markedText.size(); i ++){
-            if(!markedText.get(i).contains("REMOVE-ME")){
-                holdingCell.add(markedText.get(i));
-            }
-        }
-
-        markedText = holdingCell;
-
-        return markedText;
-    }
-
+    
     public static ArrayList<String> removeBlankStrings(ArrayList<String> rawText) {
         ArrayList<String> blanksRemoved = new ArrayList<>();
 
         for (String string : rawText) {
             char[] chars = string.toCharArray();
             string = "";
-            for(char c : chars){
-                if(c != ' '){
+            for (char c : chars) {
+                if (c != ' ') {
                     string += c;
                 }
             }
@@ -52,66 +38,51 @@ public class CleanFile {
         return blanksRemoved;
     }
 
-    public static ArrayList<String> removeNumbers(ArrayList<String> rawText){
-        ArrayList<String> numbersRemoved = new ArrayList<>();
-
-        char[] numbers = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
-
-        for(String string : rawText){
-                char[] letters = string.toCharArray();
-                string = "";
-                for(char letter : letters){
-                    for(char c : numbers){
-                        if(c != letter){
-                            string += letter;
-                        }
-                    }
-                }
-            numbersRemoved.add(string);
-            }
-        return numbersRemoved;
-    }
-
-
-
-    public static ArrayList<String> removePunctuation(ArrayList<String> rawText) {
-        ArrayList<String> cleanedText = new ArrayList<>();
-        String[] punctuationMarks = {".", ",", ":", ";", "?","<", ">", "\\", "'","{", "}", "*","-","_","(",")","[","]","|", "!", "/", "@", "#", "$", "%", "^", "&", "\"", "+", "~", "`", "="};
+    public static ArrayList<String> removeElements(ArrayList<String> rawText, String[] elements){
+        ArrayList<String> elementsRemoved = new ArrayList<>();
 
         for (String word : rawText) {
-
             String cleanedWord = "";
-
-            for (String punctuation : punctuationMarks) {
-                if (word.contains(punctuation)) {
-                    cleanedWord = word.replace(punctuation, "");
+            for (String element : elements) {
+                if (word.contains(element)) {
+                    cleanedWord = word.replace(element, "");
                     cleanedWord.trim();
                     word = cleanedWord;
                 } else {
                     cleanedWord = word;
                 }
             }
-            cleanedText.add(cleanedWord.toLowerCase());
+            elementsRemoved.add(cleanedWord);
         }
+        return elementsRemoved;
+    }
+
+    public static ArrayList<String> removeNumbers(ArrayList<String> rawText) {
+        ArrayList<String> numbersRemoved = new ArrayList<>();
+
+        String[] numbers = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+
+        numbersRemoved = removeElements(rawText, numbers);
+
+        return numbersRemoved;
+    }
+
+
+    public static ArrayList<String> removePunctuation(ArrayList<String> rawText) {
+        ArrayList<String> cleanedText = new ArrayList<>();
+        String[] punctuationMarks = {".", ",", ":", ";", "?", "<", ">", "\\", "'", "{", "}", "*", "-", "_", "(", ")", "[", "]", "|", "!", "/", "@", "#", "$", "%", "^", "&", "\"", "+", "~", "`", "="};
+
+        cleanedText = removeElements(rawText, punctuationMarks);
 
         return cleanedText;
     }
 
-    public static ArrayList<String> removeWebsites(ArrayList<String> rawText){
+    public static ArrayList<String> removeWebsites(ArrayList<String> rawText) {
         ArrayList<String> websitesRemoved = new ArrayList<>();
 
-        String[] protocols = {"http", "https", "www"};
+        String[] protocols = {"https","http", "www"};
 
-        for(String word : rawText){
-            for(String protocol : protocols){
-                if((word.contains(protocol))){
-                    word = word + "REMOVE-ME";
-                }
-            }
-            websitesRemoved.add(word);
-        }
-
-        websitesRemoved = removeMarker(websitesRemoved);
+        websitesRemoved = removeElements(rawText, protocols);
 
         return websitesRemoved;
     }
