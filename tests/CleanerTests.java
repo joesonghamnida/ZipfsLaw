@@ -50,6 +50,8 @@ public class CleanerTests {
         holdingCell = CleanFile.removeNumbers(testData);
         List<String> expectedResults = Arrays.asList("a", "b", "c", "d", "e", "ff", "gg", "hh");
         Assert.assertEquals(8, expectedResults.size());
+        System.out.println(holdingCell);
+        System.out.println(expectedResults);
         Assert.assertEquals(holdingCell, expectedResults);
     }
 
@@ -81,7 +83,7 @@ public class CleanerTests {
 
         ArrayList<String> holdingCell = new ArrayList<>();
         holdingCell = CleanFile.removeWebsites(testData);
-        List<String> expectedResults = Arrays.asList("a");
+        List<String> expectedResults = Arrays.asList("a", "b", "c", "d");
         Assert.assertEquals(holdingCell, expectedResults);
     }
 }
