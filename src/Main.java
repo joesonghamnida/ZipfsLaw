@@ -22,6 +22,7 @@ public class Main {
         Server.createWebServer().start();
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
+        program(conn, "KJV12.TXT");
         program(conn, "ArtificialLight.rtf");
         program(conn, "IBM.rtf");
         program(conn, "NitroExplosives.rtf");
